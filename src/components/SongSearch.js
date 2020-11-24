@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import SongList from "./SongList"
+import SongList from "./SongList/SongList"
 import { allSongs } from "../assets/songs"
 
 function SongSearch(props) {
@@ -21,7 +21,7 @@ function SongSearch(props) {
             />
             <SongList
                 list={filteredList}
-                handleSongClicked={props.handleSongClicked()}
+                handleSongClicked={props.handleSongClicked}
             />
         </>
     )
