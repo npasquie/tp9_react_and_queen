@@ -4,7 +4,7 @@ function SongList(props) {
 
     let songs = props.list.map((song,i) => (
         <li key={i}>
-            <p>{song}</p>
+            <p onClick={props.handleSongClicked(song)}>{song}</p>
         </li>
     ))
     return (

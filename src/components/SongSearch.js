@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import SongList from "./SongList"
 import { allSongs } from "../assets/songs"
 
-function SongSearch() {
+function SongSearch(props) {
     const [search, setSearch] = useState('')
     // filter songs by including search, not case-sensitive, the regex is used to display the full list if the search
     // is empty or contains only whitespaces
@@ -19,7 +19,10 @@ function SongSearch() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
             />
-            <SongList list={filteredList} />
+            <SongList
+                list={filteredList}
+                handleSongClicked={props.handleSongClicked()}
+            />
         </>
     )
 }
