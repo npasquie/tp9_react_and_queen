@@ -1,6 +1,6 @@
 import React, {useState} from "react"
-import SongList from "./SongList/SongList"
-import { allSongs } from "../assets/songs"
+import SongList from "../SongList"
+import { allSongs } from "../../assets/songs"
 
 function SongSearch(props) {
     const [search, setSearch] = useState('')
@@ -11,7 +11,7 @@ function SongSearch(props) {
         allSongs
 
     return (
-        <>
+        <div>
             <input
                 type={"text"}
                 size={25}
@@ -23,7 +23,7 @@ function SongSearch(props) {
                 list={filteredList}
                 handleSongClicked={props.handleSongClicked}
             />
-        </>
+        </div>
     )
 }
 

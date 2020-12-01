@@ -1,6 +1,6 @@
 import './App.css'
 import SongSearch from '../SongSearch'
-import SongList from "../SongList/SongList";
+import SongList from "../SongList";
 import React, {useState} from "react"
 
 function App() {
@@ -36,11 +36,9 @@ function App() {
 
     return (
         <div className="App">
-            <br/>
             {optionalTitle}
             <SongList list={selectedSongs} handleSongClicked={handleSongClicked}/>
             <h1>Ici on aime Queen</h1>
-            <br/>
             <SongSearch handleSongClicked={handleSongClicked}/>
         </div>
     )
