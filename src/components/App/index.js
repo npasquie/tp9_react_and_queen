@@ -3,7 +3,7 @@ import SongSearch from '../SongSearch'
 import SongList from "../SongList";
 import React, {useState} from "react"
 
-function App() {
+const App = () => {
     const [selectedSongs, setSelectedSongs] = useState([])
 
     const handleSongClicked = song => {
@@ -22,26 +22,25 @@ function App() {
     }
 
     const optionalTitle =
-            selectedSongs.length > 0
-        ?
+        selectedSongs.length > 0
+            ?
             <>
                 <h2>Titres selectionnés</h2>
                 <div
                     onClick={() => handleValidation()}
                     className={"validate"}
-                >✅ Valider ✅</div>
+                >✅ Valider ✅
+                </div>
             </>
-        :
+            :
             null
 
-    return (
-        <div className="App">
-            {optionalTitle}
-            <SongList list={selectedSongs} handleSongClicked={handleSongClicked}/>
-            <h1>Ici on aime Queen</h1>
-            <SongSearch handleSongClicked={handleSongClicked}/>
-        </div>
-    )
+    return <div className="App">
+        {optionalTitle}
+        <SongList list={selectedSongs} handleSongClicked={handleSongClicked}/>
+        <h1>Ici on aime Queen</h1>
+        <SongSearch handleSongClicked={handleSongClicked}/>
+    </div>
 }
 
 export default App
