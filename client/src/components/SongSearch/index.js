@@ -9,6 +9,7 @@ const SongSearch = props => {
     const fetchSongs = (search) => {
         axios.get('http://localhost:8081/'+search)
             .then(res => {setSongList(res.data)})
+            .catch(() => {setSongList([])})
     }
 
     return <div>
