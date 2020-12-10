@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import axios from 'axios'
 import SongList from "../SongList"
+import TextField from '@material-ui/core/TextField'
 
 const SongSearch = props => {
     const [search, setSearch] = useState('')
@@ -13,9 +14,8 @@ const SongSearch = props => {
     }
 
     return <div>
-        <input
-            type={"text"}
-            size={25}
+        <TextField
+            id="standard-basic"
             placeholder={"Rechercher un titre ..."}
             value={search}
             onChange={e => {
