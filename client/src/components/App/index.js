@@ -3,7 +3,16 @@ import SongSearch from '../SongSearch'
 import SongList from "../SongList";
 import React, {useState} from "react"
 import Button from '@material-ui/core/Button'
-import { AppBar, Typography, Toolbar, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@material-ui/core';
+import {
+    AppBar,
+    Typography,
+    Toolbar,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    DialogContentText,
+    DialogActions
+} from '@material-ui/core';
 
 const App = () => {
     const [selectedSongs, setSelectedSongs] = useState([])
@@ -41,39 +50,39 @@ const App = () => {
             <>
                 <h2>Titres selectionnés</h2>
                 <Button variant="contained" color="primary" onClick={() => handleValidation()}
-                    className={"validate"}>
+                        className={"validate"}>
                     Valider
                 </Button>
-                
+
             </>
             :
             null
 
-    const dialog = 
-    <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        animation="false"
-    >
-        <DialogTitle id="alert-dialog-title" animation="false">{'Your selected songs'}</DialogTitle>
-        <DialogContent animation="false">
-            <DialogContentText id="alert-dialog-description" animation="false">
-                {songs}
-            </DialogContentText>
-        </DialogContent>
-        <DialogActions animation="false">
-            <Button animation="false" onClick={handleClose} color="primary" autoFocus>
-                Close
-            </Button>
-        </DialogActions>
-    </Dialog>
+    const dialog =
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            animation="false"
+        >
+            <DialogTitle id="alert-dialog-title" animation="false">{'Your selected songs'}</DialogTitle>
+            <DialogContent animation="false">
+                <DialogContentText id="alert-dialog-description" animation="false">
+                    {songs}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions animation="false">
+                <Button animation="false" onClick={handleClose} color="primary" autoFocus>
+                    Close
+                </Button>
+            </DialogActions>
+        </Dialog>
 
-    return   <div className="App">
+    return <div className="App">
         <AppBar position="static" animation="false">
             <Toolbar animation="false">
-                <Typography variant="h6" >
+                <Typography variant="h6">
                     Queen Songs
                 </Typography>
             </Toolbar>
