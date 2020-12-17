@@ -1,17 +1,13 @@
 import React, {useState} from "react"
 import axios from 'axios'
+import PropType from "prop-types"
 import SongList from "../SongList"
 import TextField from '@material-ui/core/TextField'
+import {connect, useDispatch} from 'react-redux'
+import { searchSong, updateSearch } from '../../actions';
 
-const SongSearch = props => {
-    const [search, setSearch] = useState('')
-    const [songList, setSongList] = useState([])
-
-    const fetchSongs = (search) => {
-        axios.get('http://localhost:8081/'+search)
-            .then(res => {setSongList(res.data)})
-            .catch(() => {setSongList([])})
-    }
+const SongSearch = ({fetchSongs, songList, search, updateSearch}, props) => {
+    // const [search, setSearch] = useState('')
 
     return <div>
         <TextField
@@ -20,7 +16,7 @@ const SongSearch = props => {
             value={search}
             onChange={e => {
                 fetchSongs(e.target.value)
-                setSearch(e.target.value)
+                updateSearch(e.target.value)
             }}
         />
         <SongList
@@ -30,4 +26,14 @@ const SongSearch = props => {
     </div>
 }
 
-export default SongSearch
+const mapStateToProps = state =>  ({
+    songList: state.songList,
+    search: state.search
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchSongs: search => dispatch(searchSong(search)),
+    updateSearch: newSearch => dispatch(updateSearch(newSearch))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongSearch)

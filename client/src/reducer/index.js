@@ -1,31 +1,61 @@
-import { ADD_SONG, DELETE_SONGS, FALSE_OPEN, REMOVE_SONG, TRUE_OPEN} from '../actions'
+import { ADD_SONG, DELETE_SONGS, FALSE_OPEN, REMOVE_SONG, TRUE_OPEN, SEARCH_SONG_SUCCESS, UPDATE_SEARCH} from '../actions'
 
-export const songReducer = (state = {}, action) => {
+
+const initialSelectedSong = {
+    selectedSong : [""]
+};
+
+const initialOpen = {
+    open : false
+};
+
+const initialSongList = {
+    songList : [""]
+};
+
+export const songReducer = (state = initialSongList, action) => {
     switch (action.type) {
         case ADD_SONG:
             return {
-                selectedSongs: [...state.selectedSongs, action.payload],
+                ...state,
+                initialSelectedSong: [...state.selectedSongs, action.payload],
             }
 
         case DELETE_SONGS:
             return {
-                selectedSongs: []
+                ...state,
+                initialSelectedSong: []
             }
 
         case REMOVE_SONG:
             return {
-                selectedSongs: state.selectedSongs.filter(
+                ...state,
+                initialSelectedSong: state.selectedSongs.filter(
                     songFromState => songFromState !== action.payload)
             }
 
         case FALSE_OPEN:
             return {
+                ...state, 
                 open: false
             }
 
         case TRUE_OPEN:
             return {
+                ...state,
                 open: true
+            }
+        
+        case UPDATE_SEARCH:
+            return {
+                ...state, 
+                search: action.payload
+            }
+
+        case SEARCH_SONG_SUCCESS:
+            return {
+                ...state,
+                songList: action.payload.songs
             }
 
         default:
