@@ -1,13 +1,10 @@
-import React, {useState} from "react"
-import axios from 'axios'
-import PropType from "prop-types"
+import React from "react"
 import SongList from "../SongList"
 import TextField from '@material-ui/core/TextField'
 import {connect, useDispatch} from 'react-redux'
 import { searchSong, updateSearch } from '../../actions';
 
 const SongSearch = ({fetchSongs, songList, search, updateSearch}, props) => {
-    // const [search, setSearch] = useState('')
 
     return <div>
         <TextField

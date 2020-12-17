@@ -1,7 +1,7 @@
 import './App.css'
 import SongSearch from '../SongSearch'
 import SongList from "../SongList";
-import React, {useState} from "react"
+import React from "react"
 import Button from '@material-ui/core/Button'
 import {
     AppBar,
@@ -13,15 +13,14 @@ import {
     DialogContentText,
     DialogActions
 } from '@material-ui/core';
-import { addSong, deleteSongs, trueOpen, falseOpen, removeSong } from '../../actions';
-import {useDispatch} from 'react-redux'
+import { addSong, deleteSongs, trueOpen, falseOpen, removeSong, setSongs, initializeSelectedSongs } from '../../actions';
+import { connect} from 'react-redux'
 
 
-const App = () => {
-    const [selectedSongs, setSelectedSongs] = useState([])
-    const [open, setOpen] = useState(false)
-    const [songs, setSongs] = useState()
-    const dispatch = useDispatch();
+
+const App = ({handleOpen, handleClose, open, addSong, deleteSongs, setSongs, songs, selectedSongs}) => {
+
+    
 
     const handleSongClicked = song => {
         // verifies if selected song is already in the array
@@ -29,31 +28,20 @@ const App = () => {
             //setSelectedSongs(selectedSongs.filter(
                 //songFromState => songFromState !== song
             //))
-            dispatch(removeSong(song))
+            removeSong(song)
         else
-            // setSelectedSongs([...selectedSongs, song])
-            dispatch(addSong)
+            addSong(song)
     }
 
     const handleValidation = () => {
         handleOpen()
         setSongs(selectedSongs.join(', '))
-        //setSelectedSongs([])
-        dispatch(deleteSongs)
+        deleteSongs()
         return selectedSongs.join(', ')
     }
 
-    const handleClose = () => {
-        // setOpen(false)
-        dispatch(falseOpen)
-    }
 
-    const handleOpen = () => {
-        //setOpen(true)
-        dispatch(trueOpen)
-    }
-
-    const optionalTitle =
+    const optionalTitle = 
         selectedSongs.length > 0
             ?
             <>
@@ -104,4 +92,19 @@ const App = () => {
     </div>
 }
 
-export default App
+const mapStateToProps = state =>  ({
+    open: state.open,
+    songs: state.songs,
+    selectedSongs: state.selectedSongs
+})
+
+const mapDispatchToProps = dispatch => ({
+    handleClose: () => dispatch(falseOpen()),
+    handleOpen: () => dispatch(trueOpen()),
+    addSong: song => dispatch(addSong(song)),
+    removeSong: song => dispatch(removeSong(song)),
+    deleteSongs: () => dispatch(deleteSongs()),
+    setSongs: songs => dispatch(setSongs(songs)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

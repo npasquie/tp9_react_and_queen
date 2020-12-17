@@ -10,12 +10,13 @@ export const SEARCH_SONG_SUCCESS = "SEARCH_SONG_SUCCESS"
 export const SEARCH_SONG_STARTED = "SEARCH_SONG_STARTED"
 export const SEARCH_SONG_FAILURE = "SEARCH_SONG_FAILURE"
 export const UPDATE_SEARCH = "UPDATE_SEARCH"
+export const SET_SONGS = "SET_SONGS"
+export const INITIALIZE_SELECTEDSONGS = "INITIALIZE_SELECTEDSONGS"
 
 
 
-export const searchSong= (searchSong ) => {
+export const searchSong= (searchSong) => {
   return dispatch => {
-    console.log(searchSong)
     dispatch(searchSongStarted());
 
     axios
@@ -50,6 +51,9 @@ const searchSongFailure = error => ({
     }
 });
 
+export const initializeSelectedSongs = () => ({
+    type: INITIALIZE_SELECTEDSONGS
+})
 
 export const addSong = newSong => ({
     type: ADD_SONG,
@@ -79,4 +83,9 @@ export const trueOpen = () => ({
 export const updateSearch = (newSearch) => ({
     type: UPDATE_SEARCH,
     payload: newSearch
+})
+
+export const setSongs = (songs) => ({
+    type: SET_SONGS,
+    payload: songs
 })
