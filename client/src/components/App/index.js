@@ -13,35 +13,44 @@ import {
     DialogContentText,
     DialogActions
 } from '@material-ui/core';
+import { addSong, deleteSongs, trueOpen, falseOpen, removeSong } from '../../actions';
+import {useDispatch} from 'react-redux'
+
 
 const App = () => {
     const [selectedSongs, setSelectedSongs] = useState([])
     const [open, setOpen] = useState(false)
     const [songs, setSongs] = useState()
+    const dispatch = useDispatch();
 
     const handleSongClicked = song => {
         // verifies if selected song is already in the array
         if (selectedSongs.some(songFromState => songFromState === song))
-            setSelectedSongs(selectedSongs.filter(
-                songFromState => songFromState !== song
-            ))
+            //setSelectedSongs(selectedSongs.filter(
+                //songFromState => songFromState !== song
+            //))
+            dispatch(removeSong(song))
         else
-            setSelectedSongs([...selectedSongs, song])
+            // setSelectedSongs([...selectedSongs, song])
+            dispatch(addSong)
     }
 
     const handleValidation = () => {
         handleOpen()
         setSongs(selectedSongs.join(', '))
-        setSelectedSongs([])
+        //setSelectedSongs([])
+        dispatch(deleteSongs)
         return selectedSongs.join(', ')
     }
 
     const handleClose = () => {
-        setOpen(false)
+        // setOpen(false)
+        dispatch(falseOpen)
     }
 
     const handleOpen = () => {
-        setOpen(true)
+        //setOpen(true)
+        dispatch(trueOpen)
     }
 
     const optionalTitle =
