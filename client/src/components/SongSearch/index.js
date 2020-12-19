@@ -1,7 +1,7 @@
 import React from "react"
 import SongList from "../SongList"
 import TextField from '@material-ui/core/TextField'
-import {connect, useDispatch} from 'react-redux'
+import {connect} from 'react-redux'
 import { searchSong, updateSearch } from '../../actions';
 
 const SongSearch = ({fetchSongs, search, updateSearch}) => {
