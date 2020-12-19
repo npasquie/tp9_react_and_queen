@@ -29,7 +29,7 @@ const App = ({ handleClose, open, selectedSongs}) => {
             <DialogTitle id="alert-dialog-title" animation="false">{'Your selected songs'}</DialogTitle>
             <DialogContent animation="false">
                 <DialogContentText id="alert-dialog-description" animation="false">
-                    {selectedSongs.map(song => <p key={song}>{song}</p>)}
+                    {selectedSongs.map(song => song + ", " )}
                 </DialogContentText>
             </DialogContent>
             <DialogActions animation="false">
