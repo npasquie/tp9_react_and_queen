@@ -1,5 +1,6 @@
 import React from "react"
 import "./SongList.css"
+import { connect } from 'react-redux';
 
 const SongList = props => {
     console.log(props)
@@ -11,4 +12,8 @@ const SongList = props => {
     </>
 }
 
-export default SongList
+const mapStateToProps = state =>  ({
+    list: state.selectedSongs,
+})
+
+export default connect(mapStateToProps)(SongList)

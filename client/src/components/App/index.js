@@ -16,11 +16,7 @@ import {
 import { addSong, deleteSongs, trueOpen, falseOpen, removeSong, setSongs, initializeSelectedSongs } from '../../actions';
 import { connect} from 'react-redux'
 
-
-
 const App = ({handleOpen, handleClose, open, addSong, deleteSongs, setSongs, songs, selectedSongs}) => {
-
-    
 
     const handleSongClicked = song => {
         // verifies if selected song is already in the array
