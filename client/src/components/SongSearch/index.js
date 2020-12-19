@@ -10,7 +10,7 @@ const SongSearch = ({fetchSongs, search, updateSearch}) => {
         <TextField
             id="standard-basic"
             placeholder={"Rechercher un titre ..."}
-            value={search}
+            value={search || ''}
             onChange={e => {
                 fetchSongs(e.target.value)
                 updateSearch(e.target.value)
