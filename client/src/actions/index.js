@@ -24,7 +24,6 @@ export const searchSong= (searchSong) => {
         
       })
       .then(res => {
-        console.log(res.data)
         dispatch(searchSongSuccess(res.data));
       })
       .catch(err => {

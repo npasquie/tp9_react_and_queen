@@ -13,43 +13,10 @@ import {
     DialogContentText,
     DialogActions
 } from '@material-ui/core';
-import { addSong, deleteSongs, trueOpen, falseOpen, removeSong, setSongs, initializeSelectedSongs } from '../../actions';
-import { connect} from 'react-redux'
+import { falseOpen } from '../../actions';
+import {connect} from 'react-redux'
 
-const App = ({handleOpen, handleClose, open, addSong, deleteSongs, setSongs, songs, selectedSongs}) => {
-
-    const handleSongClicked = song => {
-        // verifies if selected song is already in the array
-        if (selectedSongs.some(songFromState => songFromState === song))
-            //setSelectedSongs(selectedSongs.filter(
-                //songFromState => songFromState !== song
-            //))
-            removeSong(song)
-        else
-            addSong(song)
-    }
-
-    const handleValidation = () => {
-        handleOpen()
-        setSongs(selectedSongs.join(', '))
-        deleteSongs()
-        return selectedSongs.join(', ')
-    }
-
-
-    const optionalTitle = 
-        selectedSongs.length > 0
-            ?
-            <>
-                <h2>Titres selectionnés</h2>
-                <Button variant="contained" color="primary" onClick={() => handleValidation()}
-                        className={"validate"}>
-                    Valider
-                </Button>
-
-            </>
-            :
-            null
+const App = ({ handleClose, open, selectedSongs}) => {
 
     const dialog =
         <Dialog
@@ -62,7 +29,7 @@ const App = ({handleOpen, handleClose, open, addSong, deleteSongs, setSongs, son
             <DialogTitle id="alert-dialog-title" animation="false">{'Your selected songs'}</DialogTitle>
             <DialogContent animation="false">
                 <DialogContentText id="alert-dialog-description" animation="false">
-                    {songs}
+                    {selectedSongs.map(song => <p key={song}>{song}</p>)}
                 </DialogContentText>
             </DialogContent>
             <DialogActions animation="false">
@@ -80,27 +47,18 @@ const App = ({handleOpen, handleClose, open, addSong, deleteSongs, setSongs, son
                 </Typography>
             </Toolbar>
         </AppBar>
-        {optionalTitle}
-        <SongList list={selectedSongs} handleSongClicked={handleSongClicked}/>
+        <SongList selectionType={true}/>
         <h1>Ici on aime Queen</h1>
-        <SongSearch handleSongClicked={handleSongClicked}/>
+        <SongSearch/>
         {dialog}
     </div>
 }
 
-const mapStateToProps = state =>  ({
-    open: state.open,
-    songs: state.songs,
-    selectedSongs: state.selectedSongs
-})
+const mapStateToProps = state =>  (
+    {open: state.open, selectedSongs: state.selectedSongs})
 
 const mapDispatchToProps = dispatch => ({
-    handleClose: () => dispatch(falseOpen()),
-    handleOpen: () => dispatch(trueOpen()),
-    addSong: song => dispatch(addSong(song)),
-    removeSong: song => dispatch(removeSong(song)),
-    deleteSongs: () => dispatch(deleteSongs()),
-    setSongs: songs => dispatch(setSongs(songs)),
+    handleClose: () => dispatch(falseOpen())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

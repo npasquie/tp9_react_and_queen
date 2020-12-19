@@ -1,9 +1,20 @@
-import { ADD_SONG, DELETE_SONGS, FALSE_OPEN, REMOVE_SONG, TRUE_OPEN, SEARCH_SONG_SUCCESS, UPDATE_SEARCH, SET_SONGS, INITIALIZE_SELECTEDSONGS} from '../actions'
+import {
+    ADD_SONG,
+    DELETE_SONGS,
+    FALSE_OPEN,
+    REMOVE_SONG,
+    TRUE_OPEN,
+    SEARCH_SONG_SUCCESS,
+    UPDATE_SEARCH,
+    SET_SONGS,
+    INITIALIZE_SELECTEDSONGS,
+    SEARCH_SONG_FAILURE
+} from '../actions'
 
 const initialState = {
     open : false,
     selectedSongs: [],
-    songs: ""
+    songs: []
 };
 
 
@@ -37,7 +48,8 @@ export const songReducer = (state = initialState, action) => {
         case FALSE_OPEN:
             return {
                 ...state, 
-                open: false
+                open: false,
+                selectedSongs: []
             }
 
         case TRUE_OPEN:
@@ -55,7 +67,13 @@ export const songReducer = (state = initialState, action) => {
         case SEARCH_SONG_SUCCESS:
             return {
                 ...state,
-                songList: action.payload.songs
+                songs: action.payload.songs
+            }
+
+        case SEARCH_SONG_FAILURE:
+            return {
+                ...state,
+                songs: []
             }
         
         case SET_SONGS:

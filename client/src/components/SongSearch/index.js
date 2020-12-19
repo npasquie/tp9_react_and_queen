@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import {connect, useDispatch} from 'react-redux'
 import { searchSong, updateSearch } from '../../actions';
 
-const SongSearch = ({fetchSongs, songList, search, updateSearch}, props) => {
+const SongSearch = ({fetchSongs, search, updateSearch}) => {
 
     return <div>
         <TextField
@@ -16,15 +16,11 @@ const SongSearch = ({fetchSongs, songList, search, updateSearch}, props) => {
                 updateSearch(e.target.value)
             }}
         />
-        <SongList
-            list={songList}
-            handleSongClicked={props.handleSongClicked}
-        />
+        <SongList selectionType={false}/>
     </div>
 }
 
 const mapStateToProps = state =>  ({
-    songList: state.songList,
     search: state.search
 })
 
